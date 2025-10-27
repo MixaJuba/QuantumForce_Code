@@ -1,0 +1,11 @@
+---
+description: Safety-critical content guardrails (ISO 26262)
+alwaysApply: true
+---
+
+# Safety-critical content
+
+- Clearly mark ASIL level and hazards
+- Provide safe-state and fallback behavior
+- Document timing constraints and fault handling
+- Provide verification evidence links where applicable

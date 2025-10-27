@@ -1,0 +1,11 @@
+node_modules/
+site/
+.dist/
+**/*.pdf
+**/*.svg
+**/*.png
+**/*.jpg
+**/*.gif
+**/*.webp
+**/.DS_Store
+**/*.log

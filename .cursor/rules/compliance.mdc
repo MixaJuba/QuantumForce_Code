@@ -1,0 +1,11 @@
+---
+description: Compliance rules for emissions, privacy, safety
+alwaysApply: true
+---
+
+# Compliance
+
+- Include EPA disclaimer on docs that could affect emissions
+- Include GDPR privacy guidance when VIN/location are stored or transmitted
+- Specify ASIL level for safety-relevant features
+- Avoid documenting illegal modifications

@@ -1,0 +1,9 @@
+C4Context
+title QuantumForce_Code — System Context
+Person(user, "Technician")
+System(qf, "QuantumForce Diagnostic System", "Android/Linux, Cloud/Edge")
+System_Ext(vehicle, "Vehicle ECUs")
+System_Ext(vendor, "OEM Services")
+Rel(user, qf, "Uses")
+Rel(qf, vehicle, "OBD-II / UDS / DoIP / J2534")
+Rel(qf, vendor, "Optional OEM data")

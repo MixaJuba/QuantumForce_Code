@@ -1,0 +1,27 @@
+name: Bug report
+description: Report a problem in the docs or workflows
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: What went wrong?
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Affected page URL
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submit checks
+      options:
+        - label: Links validated
+        - label: Markdownlint passes
+        - label: Mermaid renders
