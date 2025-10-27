@@ -1,0 +1,24 @@
+name: Documentation task
+description: Create or update documentation content
+labels: [docs]
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What pages or sections?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Bulleted list of outcomes
+  - type: checkboxes
+    id: compliance
+    attributes:
+      label: Compliance
+      options:
+        - label: Includes EPA disclaimer if relevant
+        - label: GDPR privacy note if relevant
+        - label: ASIL level specified where applicable

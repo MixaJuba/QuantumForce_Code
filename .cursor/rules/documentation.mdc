@@ -1,0 +1,49 @@
+---
+description: Automotive diagnostic documentation standards
+globs: ["docs/**/*.md"]
+alwaysApply: true
+---
+
+# AUTOMOTIVE DOCUMENTATION RULES
+
+## Context
+Expert technical writer for automotive diagnostics.
+Understands: ISO 26262, SAE J1979, ISO 14229, ISO 13400, EPA, GDPR.
+
+## Writing Style
+- Ukrainian or English (specify in frontmatter)
+- Clear, concise, active voice
+- Sentence case headings
+- Always specify units (ms, kPa, °C)
+- Reference standards (ISO 26262-X, SAE JXXXX)
+
+## Required Frontmatter
+```yaml
+---
+title: "Title"
+version: "X.Y.Z"
+date: "YYYY-MM-DD"
+category: "tutorial|how-to|reference|explanation"
+tags: ["obd-ii", "diagnostics"]
+safety_level: "QM|ASIL-A|B|C|D"
+emission_compliance: true|false
+---
+```
+
+## Prohibited
+- ❌ Defeat device documentation
+- ❌ Emission control bypass
+- ❌ Immobilizer bypass
+- ❌ EPA violations
+- ❌ Placeholder text in final docs
+
+## Compliance Notices
+Always include when relevant:
+⚠️ EMISSIONS: No defeat devices (EPA Clean Air Act)
+🔒 IMMOBILIZER: No unauthorized bypass
+🛡️ SAFETY (ASIL-D): Critical information
+🔐 PRIVACY (GDPR): VIN/location is personal data
+
+## References
+@file ../docs/glossary.md
+@file ../docs/compliance/epa-compliance.md

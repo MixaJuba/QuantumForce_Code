@@ -1,0 +1,108 @@
+name: Documentation CI/CD
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 0'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Markdownlint
+        uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          globs: '**/*.md'
+      
+      - name: Vale Linter
+        uses: errata-ai/vale-action@v2.1.1
+        with:
+          files: docs
+          reporter: github-pr-review
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Codespell
+        uses: codespell-project/actions-codespell@v2
+
+  mermaid-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g @mermaid-js/mermaid-cli
+      - name: Validate Mermaid
+        run: |
+          find . -name "*.md" -exec grep -l "```mermaid" {} \; | while read file; do
+            mmdc -i "$file" -o /tmp/output.svg || exit 1
+          done
+
+  link-check:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --verbose './**/*.md'
+
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, mermaid-validation]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - run: |
+          pip install mkdocs-material mkdocs-mermaid2-plugin mkdocs-minify-plugin mkdocs-git-revision-date-localized-plugin
+          mkdocs build --strict
+      - uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: site/
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material mkdocs-mermaid2-plugin mkdocs-minify-plugin mkdocs-git-revision-date-localized-plugin
+      - run: mkdocs gh-deploy --force
+
+  pr-preview:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: docs
+          path: site/
+      - uses: rossjrw/pr-preview-action@v1.4.8
+        with:
+          source-dir: site/

@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest an improvement to docs or tooling
+labels: [enhancement]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What should be improved?
+      placeholder: Clear, actionable description
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why is this needed?
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: Affects CI/CD
+        - label: Affects compliance
+        - label: Adds new protocol docs

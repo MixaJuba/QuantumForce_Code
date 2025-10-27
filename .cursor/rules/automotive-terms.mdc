@@ -1,0 +1,18 @@
+---
+description: Controlled terminology for automotive diagnostics
+alwaysApply: true
+---
+
+# GLOSSARY Hints
+
+Prefer these spellings and terms:
+- OBD-II (not OBD2)
+- CAN (Controller Area Network)
+- UDS (Unified Diagnostic Services, ISO 14229)
+- DoIP (Diagnostics over IP, ISO 13400)
+- J2534 (PassThru)
+- DTC (Diagnostic Trouble Code)
+- ECU (Electronic Control Unit)
+- VIN (Vehicle Identification Number)
+- ASIL (Automotive Safety Integrity Level)
+- ELM327 adapter

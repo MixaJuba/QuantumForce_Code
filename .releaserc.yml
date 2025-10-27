@@ -1,0 +1,38 @@
+branches:
+  - main
+  - name: beta
+    prerelease: true
+
+plugins:
+  - - "@semantic-release/commit-analyzer"
+    - preset: conventionalcommits
+      releaseRules:
+        - type: docs
+          release: patch
+        - type: feat
+          release: minor
+        - type: fix
+          release: patch
+
+  - - "@semantic-release/release-notes-generator"
+    - preset: conventionalcommits
+      presetConfig:
+        types:
+          - type: feat
+            section: "✨ Нові можливості"
+          - type: fix
+            section: "🐛 Виправлення"
+          - type: docs
+            section: "📚 Документація"
+          - type: refactor
+            section: "♻️ Рефакторинг"
+
+  - "@semantic-release/changelog"
+  
+  - - "@semantic-release/git"
+    - assets:
+        - CHANGELOG.md
+        - package.json
+      message: "chore(release): ${nextRelease.version} [skip ci]"
+  
+  - "@semantic-release/github"

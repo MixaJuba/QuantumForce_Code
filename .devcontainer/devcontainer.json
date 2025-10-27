@@ -1,0 +1,33 @@
+{
+  "name": "QuantumForce Documentation",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" },
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.11" },
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true,
+        "[markdown]": { "editor.wordWrap": "on", "editor.quickSuggestions": false }
+      },
+      "extensions": [
+        "yzhang.markdown-all-in-one",
+        "DavidAnson.vscode-markdownlint",
+        "streetsidesoftware.code-spell-checker",
+        "valentjn.vscode-ltex",
+        "esbenp.prettier-vscode",
+        "bierner.markdown-preview-github-styles",
+        "github.vscode-pull-request-github",
+        "eamodio.gitlens"
+      ]
+    }
+  },
+  "forwardPorts": [8000],
+  "postCreateCommand": "pip install mkdocs-material mkdocs-mermaid2-plugin mkdocs-minify-plugin mkdocs-git-revision-date-localized-plugin && npm install -g markdownlint-cli prettier conventional-changelog-cli",
+  "remoteUser": "vscode"
+}

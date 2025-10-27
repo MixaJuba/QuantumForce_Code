@@ -1,0 +1,11 @@
+# Ignore common technical terms and acronyms
+OBD
+UDS
+DoIP
+J2534
+ELM327
+VIN
+ECU
+ASIL
+ISO
+SAE
